@@ -10,13 +10,13 @@ resetButton.addEventListener('click',reset)
 // declare variable in our functions below
 let startTime
 let elapsedTime = 0
-let timeInterval
+let timerInterval
 
 
 // convert time to a format of hours, minutes, and millisecconds
 function timeToString(time) {
     let diffInHrs = time / 3600000
-    let hh = Math.floor(diffInMin)
+    let hh = Math.floor(diffInHrs)
 
     let diffInMin = (diffInHrs - hh) * 60
     let mm = Math.floor(diffInMin)
@@ -24,8 +24,8 @@ function timeToString(time) {
     let diffInSec = (diffInMin - mm) * 60
     let ss = Math.floor(diffInSec)
 
-    let diffInMs = (diffInSec - ss) * 60
-    let ms = Math.floor(diffInMin)
+    let diffInMs = (diffInSec - ss) * 100
+    let ms = Math.floor(diffInMs)
 
     let formattedMM = mm.toString().padStart(2, '0')
     let formattedSS = ss.toString().padStart(2, '0')
@@ -52,25 +52,24 @@ function print(txt) {
 // create start, pause and reset functions
 function start(){
     startTime = Date.now() - elapsedTime
-    timeInterval = setInterval(function printTime(){
-        elapsedTime = Date.now - startTime
+    timerInterval = setInterval(function printTime(){
+        elapsedTime = Date.now() - startTime
         print(timeToString(elapsedTime))
-    }, 10)
-
+    },10)
     showButton('pause')
 }
 
 
 function pause(){
-    clearInterval(timeInterval)
+    clearInterval(timerInterval)
     showButton('play')
 }
 
 function reset(){
-    clearInterval(timeInterval)
-    print(txt:'00:00:00')
+    clearInterval(timerInterval)
+    print('00:00:00')
     elapsedTime = 0
-    showButton(buttonkey'play')
+    showButton('play')
 
 
 }
